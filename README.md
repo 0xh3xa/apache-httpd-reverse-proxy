@@ -1,6 +1,13 @@
 # http-reverse-proxy
 
-The configure file for apply Apache2 httpd as Reverse proxy in front of the tomcat java web application with https support using SSL provided by letsencrypt for more info: https://letsencrypt.org/
+The configure file for apply Apache2 httpd as Reverse proxy in front of the tomcat java web application with https support using SSL provided by Let's Encrypt 
+
+```
+Let’s Encrypt is a free, automated, and open certificate authority (CA), run for the public’s benefit. It is a service provided by the Internet Security Research Group (ISRG).
+
+We give people the digital certificates they need in order to enable HTTPS (SSL/TLS) for websites, for free, in the most user-friendly way we can. We do this because we want to create a more secure and privacy-respecting Web.
+```
+`for more info`: https://letsencrypt.org/
 
 ![alt text](https://letsencrypt.org/images/le-logo-twitter.png)
 
@@ -8,7 +15,7 @@ You will cofigure the firewalld to allow only HTTPS port 443 and then the HTTPd 
 
 The configuration for the HTTPd service to file located at: /etc/httpd/conf.d/example.conf
 
-
+```
         <VirtualHost *:443>
           ServerName exmple.com
           ServerAlias *exmple.com
@@ -37,4 +44,4 @@ The configuration for the HTTPd service to file located at: /etc/httpd/conf.d/ex
           ErrorLog ${APACHE_LOG_DIR}/error.log
           CustomLog ${APACHE_LOG_DIR}/access.log combined
         </VirtualHost>
-        
+```
