@@ -13,7 +13,29 @@ We give people the digital certificates they need in order to enable HTTPS (SSL/
 
 You will cofigure the firewalld to allow only HTTPS port 443 and then the HTTPd will handle the request and redirect it to the tomcat internal server which is working on port 8080
 
-The configuration for the HTTPd service to file located at: /etc/httpd/conf.d/example.conf
+1. Install and configure Let's encrypt with apache-httpd
+
+```
+# yum install certbot python2-certbot-apache
+```
+, The installed **SSL Certificate** file in path `/etc/letsencrypt/live/exmple.com/fullchain.pem`
+
+, The installed **SSLCertificateKeyFile** `/etc/letsencrypt/live/exmple.com/privkey.pem`
+
+2. Configure the `firewalld` to allow only HTTPS port 443
+
+```
+# firewall-cmd --permanent --zone=public --remove-port=80/tcp
+# firewall-cmd --permanent --zone=public --remove-port=8080/tcp 
+# firewall-cmd --permanent --zone=public --add-port=443/tcp
+# firewall-cmd --permanent --zone=public --remove-service=http
+# firewall-cmd --permanent --zone=public --add-service=https
+# firewall-cmd --reload 
+```
+
+3. Configure apache-httpd will handle the request and redirect it to the tomcat internal server which is working on port 8080 in `/etc/httpd/conf.d/example.conf`
+
+This will redirect the incoming request on port 443 to tomcat which is listening on port 8080
 
 ```
         <VirtualHost *:443>
@@ -36,9 +58,6 @@ The configuration for the HTTPd service to file located at: /etc/httpd/conf.d/ex
 
           ProxyPass / http://localhost:8080/ nocanon
           ProxyPassReverse / http://localhost:8080/
-
-         #	RequestHeader set X-Forwarded-Proto "https"
-         #	RequestHeader set X-Forwarded-Port "443"
 
           LogLevel debug
           ErrorLog ${APACHE_LOG_DIR}/error.log
