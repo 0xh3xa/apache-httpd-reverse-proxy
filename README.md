@@ -1,6 +1,6 @@
 # Apache-http-reverse-proxy
 
-The configure file for apply Apache2 httpd as Reverse proxy in front of the tomcat java web application with https support using SSL provided by Let's Encrypt 
+### How to configure Apache 2 httpd as Reverse proxy in front of the tomcat java web application with SSL by Let's Encrypt?
 
 ```
 Let’s Encrypt is a free, automated, and open certificate authority (CA), run for the public’s benefit. It is a service provided by the Internet Security Research Group (ISRG).
