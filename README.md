@@ -1,4 +1,4 @@
-# http-reverse-proxy
+# Apache-http-reverse-proxy
 
 The configure file for apply Apache2 httpd as Reverse proxy in front of the tomcat java web application with https support using SSL provided by Let's Encrypt 
 
